@@ -1,0 +1,69 @@
+// Prisma schema - 多平台社媒发布框架数据模型
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// 已绑定的社媒账号
+model Account {
+  id           String   @id @default(cuid())
+  provider     String   // 平台ID: twitter / facebook / instagram / youtube ...
+  displayName  String   // 平台账号显示名
+  handle       String?  // @username
+  avatarUrl    String?
+  // 加密的 OAuth 访问令牌(实际生产应加密存储)
+  accessToken  String
+  refreshToken String?
+  tokenExpiresAt DateTime?
+  scope        String?
+  // 平台侧账号标识
+  platformUserId String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  posts        Post[]
+
+  @@index([provider])
+}
+
+// 用户创建的发布内容
+model Post {
+  id          String   @id @default(cuid())
+  text        String   // 文案
+  mediaUrls   String   @default("[]") // JSON 数组:图片/视频 URL
+  status      String   @default("draft") // draft / scheduled / publishing / published / failed
+  scheduledAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  accountId   String
+  targets     String   @default("[]") // JSON 数组:目标平台ID列表(用于发布映射)
+
+  // 各平台的发布结果日志
+  logs        PublishLog[]
+
+  @@index([accountId])
+  @@index([status])
+}
+
+// 单个平台发布结果
+model PublishLog {
+  id         String   @id @default(cuid())
+  post       Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId     String
+  provider   String   // 平台ID
+  status     String   // success / failed / pending
+  remoteId   String?  // 平台侧内容ID
+  remoteUrl  String?  // 平台侧内容链接
+  error      String?
+  createdAt  DateTime @default(now())
+
+  @@index([postId])
+  @@index([provider])
+}

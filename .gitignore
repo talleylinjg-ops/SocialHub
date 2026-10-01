@@ -1,0 +1,19 @@
+node_modules
+.next
+out
+build
+dist
+
+# 本地环境变量
+.env
+.env.local
+.env*.local
+
+# Prisma
+prisma/dev.db
+prisma/*.db-journal
+
+# 系统文件
+.DS_Store
+*.pem
+next-env.d.ts
