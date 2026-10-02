@@ -17,3 +17,4 @@ prisma/*.db-journal
 .DS_Store
 *.pem
 next-env.d.ts
+.vercel

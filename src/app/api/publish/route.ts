@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dispatchPublish } from '@/lib/distributor';
+import { ensureDatabaseReady } from '@/lib/db';
 
 // 一键多平台发布
 export async function POST(req: NextRequest) {
   try {
+    await ensureDatabaseReady();
     const body = await req.json();
     const { text, mediaUrls, link, targetProviders, scheduledAt } = body as {
       text: string;

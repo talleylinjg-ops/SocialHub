@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/db';
+import { prisma, ensureDatabaseReady } from '@/lib/db';
 
 export async function GET() {
+  await ensureDatabaseReady();
   const accounts = await prisma.account.findMany({
     orderBy: { provider: 'asc' },
     include: { _count: { select: { posts: true } } },
-  });
+  }).catch(() => []);
   return NextResponse.json({ accounts });
 }
 

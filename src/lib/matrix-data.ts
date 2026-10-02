@@ -113,7 +113,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
       { name: 'KakaoTalk', status: 'live', category: 'im', users: '4900万', notes: '已对接 · 国民级 IM' },
       { name: 'Instagram', status: 'live', category: 'image', users: '2300万', notes: '已对接' },
       { name: 'YouTube', status: 'live', category: 'video', users: '4600万', notes: '已对接' },
-      { name: 'Naver Band', status: 'planned', category: 'social', users: '3000万', notes: '待开发 · Naver Band API' },
+      { name: 'Naver Band', status: 'live', category: 'social', users: '3000万', notes: '已对接 · Naver Band API' },
       { name: 'TikTok', status: 'live', category: 'video', users: '1000万', notes: '已对接' },
     ],
   },
@@ -141,8 +141,8 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
       { name: 'YouTube', status: 'live', category: 'video', users: '4.6亿', notes: '已对接' },
       { name: 'Instagram', status: 'live', category: 'image', users: '3.6亿', notes: '已对接' },
       { name: 'Facebook', status: 'live', category: 'social', users: '3.5亿', notes: '已对接' },
-      { name: 'ShareChat', status: 'planned', category: 'social', users: '1.8亿', notes: '待开发 · 印度本土 15+ 语种' },
-      { name: 'Koo', status: 'planned', category: 'microblog', users: '6000万', notes: '待开发 · 印度版 Twitter' },
+      { name: 'ShareChat', status: 'live', category: 'social', users: '1.8亿', notes: '已对接 · 印度本土 15+ 语种' },
+      { name: 'Koo', status: 'live', category: 'microblog', users: '6000万', notes: '已对接 · 印度版 Twitter' },
     ],
   },
   {
@@ -167,7 +167,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
       { name: 'Facebook', status: 'live', category: 'social', users: '5000万', notes: '已对接 · 国民级社媒' },
       { name: 'WhatsApp', status: 'live', category: 'im', users: '4000万', notes: '已对接' },
       { name: 'YouTube', status: 'live', category: 'video', users: '3500万', notes: '已对接' },
-      { name: 'Imo', status: 'planned', category: 'im', users: '3000万', notes: '待开发 · 本土 IM' },
+      { name: 'Imo', status: 'live', category: 'im', users: '3000万', notes: '已对接 · 本土 IM Bot API' },
       { name: 'TikTok', status: 'live', category: 'video', users: '2500万', notes: '已对接' },
     ],
   },
@@ -218,7 +218,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
     language: '越南语',
     platforms: [
       { name: 'Facebook', status: 'live', category: 'social', users: '7000万', notes: '已对接 · 国民级社媒' },
-      { name: 'Zalo', status: 'planned', category: 'im', users: '7500万', notes: '待开发 · 本土 IM 第一' },
+      { name: 'Zalo', status: 'live', category: 'im', users: '7500万', notes: '已对接 · 越南第一 IM OA API' },
       { name: 'TikTok', status: 'live', category: 'video', users: '5000万', notes: '已对接' },
       { name: 'YouTube', status: 'live', category: 'video', users: '6000万', notes: '已对接' },
       { name: 'Instagram', status: 'live', category: 'image', users: '1400万', notes: '已对接' },
@@ -272,7 +272,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
       { name: 'Facebook', status: 'live', category: 'social', users: '3000万', notes: '已对接 · 国民级社媒' },
       { name: 'TikTok', status: 'live', category: 'video', users: '1600万', notes: '已对接' },
       { name: 'YouTube', status: 'live', category: 'video', users: '1400万', notes: '已对接' },
-      { name: 'Viber', status: 'planned', category: 'im', users: '800万', notes: '待开发 · 本土 IM' },
+      { name: 'Viber', status: 'live', category: 'im', users: '800万', notes: '已对接 · 本土 IM Bot API' },
     ],
   },
   {
@@ -328,7 +328,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
       { name: 'YouTube', status: 'live', category: 'video', users: '6000万', notes: '已对接' },
       { name: 'Facebook', status: 'live', category: 'social', users: '3000万', notes: '已对接' },
       { name: 'Instagram', status: 'live', category: 'image', users: '3500万', notes: '已对接' },
-      { name: 'XING', status: 'planned', category: 'professional', users: '800万', notes: '待开发 · 德语区职场平台' },
+      { name: 'XING', status: 'live', category: 'professional', users: '800万', notes: '已对接 · 德语区职场平台' },
     ],
   },
   {
@@ -485,7 +485,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
     platforms: [
       { name: 'VKontakte (VK)', status: 'live', category: 'social', users: '7000万', notes: '已对接 · 俄国第一社媒' },
       { name: 'Telegram', status: 'live', category: 'im', users: '9000万', notes: '已对接 · 国民级 IM' },
-      { name: 'Odnoklassniki', status: 'planned', category: 'social', users: '4000万', notes: '待开发 · OK API' },
+      { name: 'Odnoklassniki', status: 'live', category: 'social', users: '4000万', notes: '已对接 · OK mediatopic API' },
       { name: 'YouTube', status: 'live', category: 'video', users: '7000万', notes: '已对接' },
       { name: 'TikTok', status: 'live', category: 'video', users: '5000万', notes: '已对接' },
     ],
@@ -669,7 +669,7 @@ export const globalSocialMediaMatrix: CountryPlatforms[] = [
       { name: 'Instagram', status: 'live', category: 'image', users: '4700万', notes: '已对接 · 伊朗第一社媒' },
       { name: 'Telegram', status: 'live', category: 'im', users: '5000万', notes: '已对接 · 国民级 IM' },
       { name: 'WhatsApp', status: 'live', category: 'im', users: '3000万', notes: '已对接' },
-      { name: 'Rubika', status: 'planned', category: 'social', users: '2000万', notes: '待开发 · 伊朗本土平台' },
+      { name: 'Rubika', status: 'live', category: 'social', users: '2000万', notes: '已对接 · 伊朗本土 Bot API' },
     ],
   },
   {

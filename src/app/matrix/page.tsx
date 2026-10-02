@@ -81,7 +81,7 @@ export default function MatrixPage() {
           <div className="text-xs text-gray-500">覆盖国家/地区</div>
         </div>
         <div className="card p-4 text-center">
-          <div className="text-2xl font-bold text-purple-600">14</div>
+          <div className="text-2xl font-bold text-purple-600">23</div>
           <div className="text-xs text-gray-500">已实现适配器</div>
         </div>
       </div>

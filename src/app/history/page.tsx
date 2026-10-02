@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db';
+import { prisma, ensureDatabaseReady } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 import { CheckCircle2, XCircle, Clock, ExternalLink } from 'lucide-react';
 
@@ -13,11 +13,12 @@ const statusLabel: Record<string, { text: string; cls: string }> = {
 };
 
 export default async function HistoryPage() {
+  await ensureDatabaseReady();
   const posts = await prisma.post.findMany({
     orderBy: { createdAt: 'desc' },
     include: { logs: true, account: true },
     take: 50,
-  });
+  }).catch(() => []);
 
   return (
     <div className="space-y-6">

@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/db';
+import { prisma, ensureDatabaseReady } from '@/lib/db';
 import { getAllAdapters } from '@/lib/platforms';
 import Link from 'next/link';
 import { PenSquare, Users, Globe, History, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -6,9 +6,10 @@ import { PenSquare, Users, Globe, History, ArrowRight, CheckCircle2, AlertCircle
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
+  await ensureDatabaseReady();
   const [accounts, posts, platforms] = await Promise.all([
-    prisma.account.findMany(),
-    prisma.post.findMany({ take: 5, orderBy: { createdAt: 'desc' }, include: { logs: true } }),
+    prisma.account.findMany().catch(() => []),
+    prisma.post.findMany({ take: 5, orderBy: { createdAt: 'desc' }, include: { logs: true } }).catch(() => []),
     Promise.resolve(getAllAdapters()),
   ]);
 

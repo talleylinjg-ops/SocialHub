@@ -13,6 +13,15 @@ import { SnapchatAdapter } from './snapchat';
 import { WhatsAppAdapter } from './whatsapp';
 import { LINEAdapter } from './line';
 import { KakaoTalkAdapter } from './kakaotalk';
+import { NaverBandAdapter } from './naverband';
+import { ShareChatAdapter } from './sharechat';
+import { KooAdapter } from './koo';
+import { ImoAdapter } from './imo';
+import { ZaloAdapter } from './zalo';
+import { ViberAdapter } from './viber';
+import { XINGAdapter } from './xing';
+import { OdnoklassnikiAdapter } from './odnoklassniki';
+import { RubikaAdapter } from './rubika';
 
 // ============ 平台注册表 ============
 // 新增平台只需在此实例化注册,发布分发器自动支持。
@@ -31,6 +40,15 @@ const adapters: SocialPlatformAdapter[] = [
   new WhatsAppAdapter(),
   new LINEAdapter(),
   new KakaoTalkAdapter(),
+  new NaverBandAdapter(),
+  new ShareChatAdapter(),
+  new KooAdapter(),
+  new ImoAdapter(),
+  new ZaloAdapter(),
+  new ViberAdapter(),
+  new XINGAdapter(),
+  new OdnoklassnikiAdapter(),
+  new RubikaAdapter(),
 ];
 
 const adapterMap = new Map<string, SocialPlatformAdapter>(
