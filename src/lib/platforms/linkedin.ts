@@ -42,7 +42,20 @@ export class LinkedInAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('LINKEDIN_CLIENT_ID') && env('LINKEDIN_CLIENT_SECRET'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('LINKEDIN_CLIENT_ID') && env('LINKEDIN_CLIENT_SECRET'));
+  }
+
+  /** 生成 LinkedIn 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const url = content.link ? encodeURIComponent(content.link) : '';
+    const text = encodeURIComponent(content.text);
+    return url
+      ? `https://www.linkedin.com/sharing/share-offsite/?url=${url}&text=${text}`
+      : `https://www.linkedin.com/sharing/share-offsite/?text=${text}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

@@ -49,7 +49,17 @@ export class RubikaAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('RUBIKA_BOT_TOKEN') && env('RUBIKA_CHANNEL_ID'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('RUBIKA_BOT_TOKEN') && env('RUBIKA_CHANNEL_ID'));
+  }
+
+  /** 生成 Rubika 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text);
+    return `https://rubika.ir/sharer?text=${text}`;
   }
 
   async getAuthorizeUrl(): Promise<{ url: string; codeVerifier?: string }> {

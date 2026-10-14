@@ -49,7 +49,17 @@ export class ViberAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('VIBER_BOT_TOKEN') && env('VIBER_CHANNEL_ID'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('VIBER_BOT_TOKEN') && env('VIBER_CHANNEL_ID'));
+  }
+
+  /** 生成 Viber 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text + (content.link ? `\n${content.link}` : ''));
+    return `viber://forward?text=${text}`;
   }
 
   async getAuthorizeUrl(): Promise<{ url: string; codeVerifier?: string }> {

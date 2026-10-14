@@ -121,6 +121,10 @@ export interface SocialPlatformAdapter {
   validate?(content: PublishContent): ValidationResult;
   /** 是否已配置有效凭证(运行时检测) */
   isConfigured(): boolean;
+  /** 是否为分享链接模式(无需 API/无需绑定账号) */
+  isShareLinkMode?(): boolean;
+  /** 生成分享链接(仅 share-link 模式平台实现) */
+  getShareUrl?(content: PublishContent): string;
 }
 
 // ============ 抽象基类:提供默认 validate 实现 ============
@@ -140,6 +144,10 @@ export abstract class BasePlatformAdapter implements SocialPlatformAdapter {
   ): Promise<AccountInfo>;
   abstract publish(content: PublishContent, account: StoredAccount): Promise<PublishResult>;
   abstract isConfigured(): boolean;
+
+  isShareLinkMode(): boolean {
+    return false;
+  }
 
   validate(content: PublishContent): ValidationResult {
     const errors: string[] = [];

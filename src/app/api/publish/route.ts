@@ -31,12 +31,17 @@ export async function POST(req: NextRequest) {
     });
 
     const successCount = outcome.results.filter((r) => r.result.success).length;
+    const shareLinks = outcome.results
+      .filter((r) => r.result.remoteId === 'share-link')
+      .map((r) => ({ provider: r.provider, url: r.result.remoteUrl }));
+
     return NextResponse.json({
       ok: true,
       postId: outcome.postId,
       successCount,
       totalCount: outcome.results.length,
       results: outcome.results,
+      shareLinks: shareLinks.length > 0 ? shareLinks : undefined,
     });
   } catch (e) {
     return NextResponse.json({ error: (e as Error).message }, { status: 500 });

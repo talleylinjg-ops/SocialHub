@@ -43,7 +43,20 @@ export class RedditAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('REDDIT_CLIENT_ID') && env('REDDIT_CLIENT_SECRET'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('REDDIT_CLIENT_ID') && env('REDDIT_CLIENT_SECRET'));
+  }
+
+  /** 生成 Reddit 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const title = encodeURIComponent(content.text.slice(0, 300));
+    const url = content.link ? encodeURIComponent(content.link) : '';
+    return url
+      ? `https://www.reddit.com/submit?title=${title}&url=${url}`
+      : `https://www.reddit.com/submit?title=${title}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

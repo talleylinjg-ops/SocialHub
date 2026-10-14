@@ -49,7 +49,20 @@ export class TelegramAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('TELEGRAM_BOT_TOKEN') && env('TELEGRAM_CHANNEL_ID'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('TELEGRAM_BOT_TOKEN') && env('TELEGRAM_CHANNEL_ID'));
+  }
+
+  /** 生成 Telegram 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text);
+    const url = content.link ? encodeURIComponent(content.link) : '';
+    return url
+      ? `https://t.me/share/url?url=${url}&text=${text}`
+      : `https://t.me/share/url?text=${text}`;
   }
 
   // Telegram 跳过 OAuth,直接用 Bot Token + Channel ID

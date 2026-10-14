@@ -47,7 +47,17 @@ export class LINEAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('LINE_CHANNEL_ID') && env('LINE_CHANNEL_ACCESS_TOKEN'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('LINE_CHANNEL_ID') && env('LINE_CHANNEL_ACCESS_TOKEN'));
+  }
+
+  /** 生成 LINE 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text + (content.link ? `\n${content.link}` : ''));
+    return `https://line.me/R/msg/text/?${text}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

@@ -48,7 +48,17 @@ export class ShareChatAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('SHARECHAT_CLIENT_ID') && env('SHARECHAT_CLIENT_SECRET'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('SHARECHAT_CLIENT_ID') && env('SHARECHAT_CLIENT_SECRET'));
+  }
+
+  /** 生成 ShareChat 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text);
+    return `https://sharechat.com/share?text=${text}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

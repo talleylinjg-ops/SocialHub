@@ -47,7 +47,20 @@ export class KakaoTalkAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('KAKAO_REST_API_KEY') && env('KAKAO_ADMIN_KEY'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('KAKAO_REST_API_KEY') && env('KAKAO_ADMIN_KEY'));
+  }
+
+  /** 生成 KakaoTalk 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text);
+    const url = content.link ? encodeURIComponent(content.link) : '';
+    return url
+      ? `https://sharer.kakao.com/talk/friends/picker?text=${text}&url=${url}`
+      : `https://sharer.kakao.com/talk/friends/picker?text=${text}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

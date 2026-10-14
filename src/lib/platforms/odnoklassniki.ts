@@ -48,7 +48,18 @@ export class OdnoklassnikiAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('OK_CLIENT_ID') && env('OK_CLIENT_SECRET') && env('OK_PUBLIC_KEY'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('OK_CLIENT_ID') && env('OK_CLIENT_SECRET') && env('OK_PUBLIC_KEY'));
+  }
+
+  /** 生成 Odnoklassniki 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const url = content.link ? encodeURIComponent(content.link) : '';
+    const text = encodeURIComponent(content.text);
+    return `https://connect.ok.ru/offer?${url ? `url=${url}&` : ''}title=${text}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

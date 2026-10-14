@@ -42,7 +42,20 @@ export class FacebookAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('FACEBOOK_APP_ID') && env('FACEBOOK_APP_SECRET'));
+    return true; // 分享链接模式始终可用
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('FACEBOOK_APP_ID') && env('FACEBOOK_APP_SECRET'));
+  }
+
+  /** 生成 Facebook 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const url = content.link ? encodeURIComponent(content.link) : '';
+    const quote = encodeURIComponent(content.text);
+    return url
+      ? `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`
+      : `https://www.facebook.com/sharer/sharer.php?quote=${quote}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {

@@ -47,7 +47,18 @@ export class WhatsAppAdapter extends BasePlatformAdapter {
   };
 
   isConfigured(): boolean {
-    return !!(env('WHATSAPP_PHONE_NUMBER_ID') && env('WHATSAPP_ACCESS_TOKEN'));
+    // 分享链接模式始终可用，Cloud API 模式需要环境变量
+    return true;
+  }
+
+  isShareLinkMode(): boolean {
+    return !(env('WHATSAPP_PHONE_NUMBER_ID') && env('WHATSAPP_ACCESS_TOKEN'));
+  }
+
+  /** 生成 WhatsApp 分享链接 */
+  getShareUrl(content: PublishContent): string {
+    const text = encodeURIComponent(content.text + (content.link ? `\n${content.link}` : ''));
+    return `https://wa.me/?text=${text}`;
   }
 
   async getAuthorizeUrl(redirectUri: string, state: string) {
